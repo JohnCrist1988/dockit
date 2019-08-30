@@ -22,19 +22,20 @@ elif [ "$1" == "list" ] || [ "$1" == "-l" ]; then
 
 # If nothing else, just show the help text
 else
-	echo "usage: dockit <operation> [...]"
-	echo "operations:"
-	echo "	dockit	{create -c}		<name>"
-	echo "		Create a container called <name>."
-	echo "	dockit	{enter -e}		<name>"
-	echo "		Enter the container <name>."
-	echo "	dockit	{stop -s}		<name>"
-	echo "		Stop the running container <name>."
-	echo "	dockit	{restart -r}	<name>"
-	echo "		Restart the container <name>."
-	echo "	dockit	{remove -R}		<name>"
-	echo "		Remove the container <name>. If the container"
-	echo "		is currently running, it will be stopped first."
-	echo "	dockit	{list -l}"
-	echo "		List all available containers."
+	bold=$(tput bold)
+	normal=$(tput sgr0)
+	echo "${bold}usage:${normal} dockit <operation> [...]"
+	echo -e "${bold}operations:${normal}\n"
+	echo "${bold}dockit {create -c} <name>${normal}"
+	echo -e "Create a container called <name>.\n"
+	echo "${bold}dockit {enter -e} <name>${normal}"
+	echo -e "Enter the container <name>.\n"
+	echo "${bold}dockit {stop -s} <name>${normal}"
+	echo -e "Stop the running container <name>.\n"
+	echo "${bold}dockit {restart -r} <name>${normal}"
+	echo -e "Restart the container <name>.\n"
+	echo "${bold}dockit {remove -R} <name>${normal}"
+	echo -e "Remove the container <name>. If the container is currently running, it will be stopped first.\n"
+	echo "${bold}dockit {list -l}${normal}"
+	echo -e "List all available containers.\n"
 fi
