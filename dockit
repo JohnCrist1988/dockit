@@ -19,4 +19,22 @@ elif [ "$1" == "remove" ] || [ "$1" == "-R" ]; then
 	docker stop $2; docker rm $2
 elif [ "$1" == "list" ] || [ "$1" == "-l" ]; then
 	docker ps -a
+
+# If nothing else, just show the help text
+else
+	echo "usage: dockit <operation> [...]"
+	echo "operations:"
+	echo "	dockit	{create -c}		<name>"
+	echo "		Create a container called <name>."
+	echo "	dockit	{enter -e}		<name>"
+	echo "		Enter the container <name>."
+	echo "	dockit	{stop -s}		<name>"
+	echo "		Stop the running container <name>."
+	echo "	dockit	{restart -r}	<name>"
+	echo "		Restart the container <name>."
+	echo "	dockit	{remove -R}		<name>"
+	echo "		Remove the container <name>. If the container"
+	echo "		is currently running, it will be stopped first."
+	echo "	dockit	{list -l}"
+	echo "		List all available containers."
 fi
