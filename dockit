@@ -1,17 +1,12 @@
 #!/bin/bash
 
-# Notes for myself:
-# Creating the container: docker run -it -d --name=<name> -v $HOME:/root fedora /bin/bash
-# Entering the container: docker start <name>; docker exec -it <name> /bin/bash
-
-
 # Are we root? If so, stop immediately.
 if [ `id -u` == 0 ]; then
 	echo "Do not run dockit as root. Exiting."
 	exit 1
 fi
 
-# Creating a container
+# Script Execution
 if [ "$1" == "create" ] || [ "$1" == "-c" ]; then
 	docker run -it -d --name=$2 -v $HOME:/root fedora /bin/bash && echo "Container created. Enter the container by executing: \"dockit enter $2\"!"
 elif [ "$1" == "enter" ] || [ "$1" == "-e" ]; then
