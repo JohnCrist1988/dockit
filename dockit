@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Notes for myself:
+# Creating the container: docker run -it -d --name=<name> -v $HOME:/root fedora /bin/bash
+# Entering the container: docker start <name>; docker exec -it <name> /bin/bash
+
+
+# Are we root? If so, stop immediately.
+if [ `id -u` == 0 ]; then
+	echo "Do not run dockit as root. Exiting."
+	exit 1
+fi
+
+# Creating a container
+if [ "$1" == "create" ] || [ "$1" == "-c" ]; then
+	docker run -it -d --name=$2 -v $HOME:/root fedora /bin/bash && echo "Container created. Enter the container by executing: \"dockit enter $2\"!"
+elif [ "$1" == "enter" ] || [ "$1" == "-e" ]; then
+	docker start $2 && docker exec -it $2 /bin/bash
+elif [ "$1" == "stop" ] || [ "$1" == "-s" ]; then
+	docker stop $2
+elif [ "$1" == "restart" ] || [ "$1" == "-r" ]; then
+	docker stop $2 && docker start $2
+elif [ "$1" == "remove" ] || [ "$1" == "-R" ]; then
+	docker stop $2; docker rm $2
+elif [ "$1" == "list" ] || [ "$1" == "-l" ]; then
+	docker ps -a
+fi
